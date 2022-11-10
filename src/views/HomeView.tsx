@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
+import { appTheme } from '../theme/theme';
 
 
 export const HomeView: React.FC = ()=>{
@@ -15,7 +16,7 @@ export const HomeView: React.FC = ()=>{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#ccc',
+      backgroundColor: appTheme.colorBackground,
       alignItems: 'center',
       justifyContent: 'center',
     },
