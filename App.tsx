@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
+import { HomeView } from './src/views';
 
 const Stack = createNativeStackNavigator()
 
@@ -11,8 +12,8 @@ export default function App() {
          <Stack.Navigator>
           <Stack.Screen
           name='Home'
-          component={}
-          options={{title:"Hola"}}/>
+          component={HomeView}
+          options={{title:"Este es el home View"}}/>
          </Stack.Navigator>
     </NavigationContainer>
   );
