@@ -1,0 +1,1 @@
+export {IMovement,MovementContextType} from './movement.type'
