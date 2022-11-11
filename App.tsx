@@ -7,24 +7,27 @@ import { HomeView } from './src/views';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const[texts] = useFonts({
-    [appTheme.textTitle]: require("./assets/fonts/Poppins//Poppins-Medium.ttf"),
-    [appTheme.textNormal]: require("./assets/fonts/Roboto/Roboto-Regular.ttf")
+  const texts = async ()=>  await useFonts({
+    "title": require("./assets/fonts/Poppins//Poppins-Medium.ttf"),
+    "normal": require("./assets/fonts/Roboto/Roboto-Regular.ttf")
  })
   return (
-    <NavigationContainer>
-         <Stack.Navigator>
-          <MovementProvider>
-            <Stack.Screen
-            name='Home'
-            component={HomeView}
-            options={{title:"Este es el home View"}}/>
-            <Stack.Screen
-            name='Detail:id'
-            component={HomeView}
-            options={{title:"Este es el home View"}}/>
-          </MovementProvider>
-         </Stack.Navigator>
-    </NavigationContainer>
+    <MovementProvider>
+      <NavigationContainer>
+          <Stack.Navigator>
+
+              <Stack.Screen
+              name='Home'
+              component={HomeView}
+              options={{title:"Este es el home View"}}/>
+
+              <Stack.Screen
+              name='Detail'
+              component={HomeView}
+              options={{title:"Este es el home View"}}/>
+            
+          </Stack.Navigator>
+      </NavigationContainer>
+    </MovementProvider>
   );
 }
