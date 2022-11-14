@@ -3,15 +3,20 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import { appTheme, MovementProvider } from './src/constants';
 import { HomeView } from './src/views';
+import { LoadingFonts } from './src/views/LoadingFonts';
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const texts = async ()=>  await useFonts({
-    "title": require("./assets/fonts/Poppins//Poppins-Medium.ttf"),
-    "normal": require("./assets/fonts/Roboto/Roboto-Regular.ttf")
+  const [fontsLoaded] =  useFonts({
+    "poppins": require("./assets/fonts/Poppins/Poppins-Medium.ttf"),
+    "roboto": require("./assets/fonts/Roboto/Roboto-Regular.ttf")
  })
+ 
   return (
+    !fontsLoaded 
+    ? <LoadingFonts />
+    :
     <MovementProvider>
       <NavigationContainer>
           <Stack.Navigator>
@@ -19,12 +24,18 @@ export default function App() {
               <Stack.Screen
               name='Home'
               component={HomeView}
-              options={{title:"Este es el home View"}}/>
+              options={{headerShown:false}}/>
 
               <Stack.Screen
               name='Detail'
               component={HomeView}
-              options={{title:"Este es el home View"}}/>
+              options={{headerShown:false}}/>
+
+              <Stack.Screen
+              name='New'
+              component={HomeView}
+              options={{headerShown:false}}/>
+
             
           </Stack.Navigator>
       </NavigationContainer>
