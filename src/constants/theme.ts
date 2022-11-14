@@ -8,11 +8,10 @@ export const appTheme ={
     colorText:"#b25d08",
     colorTextSecondary:"#AC6C25",
     colorCard:"#0c0c0c",
-    mainFontSize: 26,
-    secondaryFontsize:20,
-    textTitle:"title",
-    textNormal:"normal",
-    textBold: "normal-bold"
+    mainFontSize: 18,
+    secondaryFontsize:22,
+    textTitle:"poppins",
+    textNormal:"roboto",
     
 }
 
@@ -38,5 +37,5 @@ export const cardBoxShadow={
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
 
-    elevation: 4,
+    elevation: 5,
 }

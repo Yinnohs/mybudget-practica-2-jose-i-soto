@@ -1,0 +1,1 @@
+export {deleteOne} from './DeleteOne'
