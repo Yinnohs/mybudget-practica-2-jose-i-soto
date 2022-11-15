@@ -35,14 +35,18 @@ export const Navbar:React.FC = ()=>{
 
 const styles = StyleSheet.create({
     navBar:{
+        position:'absolute',
+        bottom:0,
+        left:0,
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-evenly',
         alignItems: 'center',
-        height:100,
+        height:90,
         width:'100%',
         borderTopColor: appTheme.colorTerciary,
         borderTopWidth: 0.5,
+        backgroundColor:appTheme.colorBackground
     },
     shadow:{
         ...buttonBoxShadow
