@@ -1,12 +1,10 @@
 // context/todoContext.tsx
-import * as React from 'react';
-import { v4 } from 'uuid';
+import * as React from 'react'
 import { IMovement, MovementContextType } from '../types/movement.type';
 
 export const MovementsContext= React.createContext<MovementContextType | null>(null);
 export const MovementsContextProvider = MovementsContext.Provider;
-const currentDate = new Date()
-const mockData :IMovement[] =[]
+const mockData :IMovement[] = []
 
 
 export const MovementProvider: React.FC<any> = ({ children }:{children:any}):any => {
