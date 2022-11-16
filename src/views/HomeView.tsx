@@ -52,23 +52,16 @@ export const HomeView: React.FC = ()=>{
                 initialNumToRender={10}
                 data={movements} 
                 keyExtractor={(element)=> element.id} 
-                renderItem={({item})=> <BalanceItem id={item.id} amount={item.amount} description={item.description} movementDate={item.movementDate}/>} 
+                renderItem={({item})=>
+                    <BalanceItem 
+                    id={item.id} 
+                    amount={item.amount} 
+                    description={item.description} 
+                    movementDate={item.movementDate}/>} 
                 bounces={false}
                 collapsable={true}
                 style={{marginBottom:90,height:'60%'}}
             /> 
-                {/* {movements.length > 0 ? movements.map(({id,amount,description,movementDate})=>{
-                    return(
-                            <BalanceItem
-                            key={id}
-                            id={id}
-                            amount={amount}
-                            description={description}
-                            movementDate={movementDate}
-                             />
-                    )
-                }): []} */}
-            {/* </ScrollView> */}
                 <Navbar/>
         </KeyboardAvoidingView>
         
@@ -87,6 +80,4 @@ const styles = StyleSheet.create({
         width:"100%",
         borderWidth:0
     },
-    movementsContainer:{
-    }
   });

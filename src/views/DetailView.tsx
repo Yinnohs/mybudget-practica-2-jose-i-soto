@@ -18,7 +18,7 @@ import { handleError, stringDateFormatter } from "../utils"
 
 export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
     const navigation = useNavigation<HomeScreenProp|DetailScreenProp|AddScreenProp>()
-    const {movements} = useContext(MovementsContext) as MovementContextType
+    const {movements,setMovements} = useContext(MovementsContext) as MovementContextType
     const {id} = route.params
     let currentMovement = movements.find((movement)=> movement.id === id)
     currentMovement
@@ -54,15 +54,21 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
             handleError('El campo de "Cantidad" debe ser correcto, y tener + o -')
             return
         }
+        
         const movementsUpdated = movements.map((movement)=>{
-            if(movement.id === id  ){
+            if(movement.id === id){
                 if(movement.amount !== amount) movement.amount = amount
                 if(movement.description !== movementInput.description){ 
                     movementInput.description = movementInput.description
                 }
                 return movement
             }
+            return movement
         })
+
+        setMovements(movementsUpdated)
+        navigation.navigate("Home")
+        
     }
 
     const dateString = `Fecha de creacion: ${stringDateFormatter(currentMovement!.movementDate)}`
@@ -104,7 +110,7 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
             <BasicButton label="Cancelar" action={()=> navigation.navigate("Home")} />
             {movementInput.amount === "" || movementInput.description === ""
             ? <BasicButton label="Enviar" action={()=> console.log("disabled")} disabled={true} />
-            :<BasicButton label="Enviar" action={()=> alert()} />
+            :<BasicButton label="Enviar" action={()=> handleUpdate()} />
         }
         </View>
         <Navbar/>
