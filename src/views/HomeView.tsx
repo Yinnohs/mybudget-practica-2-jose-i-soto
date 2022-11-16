@@ -5,6 +5,7 @@ import { Navbar } from '../components/navBar';
 import { MovementsContext } from '../constants/reducer';
 import { appTheme } from '../constants/theme';
 import { MovementContextType } from '../types';
+import { KeyboardAvoidingView } from 'react-native';
 
 
 export const HomeView: React.FC = ()=>{
@@ -35,7 +36,8 @@ export const HomeView: React.FC = ()=>{
     },[movements])
 
     return(
-        <View style={styles.container}>
+        
+        <KeyboardAvoidingView style={styles.container}>
 
             <ScrollView style={styles.balanceContainer} 
             contentContainerStyle={{justifyContent:"center",flexDirection:"row",alignItems:'center'}}
@@ -68,7 +70,8 @@ export const HomeView: React.FC = ()=>{
                 }): []} */}
             {/* </ScrollView> */}
                 <Navbar/>
-        </View>
+        </KeyboardAvoidingView>
+        
     )
 }
 

@@ -1,2 +1,2 @@
 export {appTheme,cardBoxShadow,buttonBoxShadow} from './theme'
-export{MovementProvider} from './reducer'
+export{MovementProvider, MovementsContextProvider, MovementsContext} from './reducer'

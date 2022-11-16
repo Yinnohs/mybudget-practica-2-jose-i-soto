@@ -12,7 +12,7 @@ export const BalanceCard: FC<BalanceCardProps> = ({balance, balanceType}:Balance
     return(
         <View style={[styles.card,styles.cardShadow]}>
             <Text style={styles.cardTextTitle}>{balanceType}:</Text>
-            <Text style={ styles.cardTextNumber}>{balance}</Text>
+            <Text style={balance >= 0 ? styles.cardTextNumber : {...styles.cardTextNumber,color:appTheme.colorWarning}}>{balance}</Text>
         </View>
     )
 }
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     cardTextNumber:{
         fontSize:38,
-        color: appTheme.colorSecondary
+        color: appTheme.colorPass
     }
 
 })

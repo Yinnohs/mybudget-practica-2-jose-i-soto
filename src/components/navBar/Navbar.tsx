@@ -1,15 +1,15 @@
 import React from "react"
-import { StyleSheet, View, Pressable} from "react-native";
+import { StyleSheet, Pressable, KeyboardAvoidingView, Platform} from "react-native";
 import { appTheme, buttonBoxShadow } from "../../constants";
 import {AntDesign} from '@expo/vector-icons'
-import { NavigationProp,useNavigation } from "@react-navigation/native";
+import {useNavigation } from "@react-navigation/native";
 import { AddScreenProp,DetailScreenProp,HomeScreenProp } from "../../types";
 
 
 export const Navbar:React.FC = ()=>{
     const navigation = useNavigation<HomeScreenProp|DetailScreenProp|AddScreenProp>()
     return(
-        <View style={styles.navBar}>
+        <KeyboardAvoidingView style={styles.navBar} enabled={false} behavior={Platform.OS === "ios" ? "padding" : "height"}>
             <Pressable>
                 <AntDesign 
                     name="home" 
@@ -29,7 +29,7 @@ export const Navbar:React.FC = ()=>{
                     style={[styles.shadow, styles.button]}
                 />
             </Pressable>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 

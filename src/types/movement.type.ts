@@ -9,3 +9,8 @@ export type MovementContextType = {
     movements: IMovement[];
     setMovements: Function
 };
+
+export type MovementInputType = {
+    description:string
+    amount:string
+}

@@ -3,19 +3,22 @@ import { View, Text,StyleSheet} from "react-native"
 import { appTheme, cardBoxShadow } from "../../constants/theme"
 import { stringDateFormatter } from "../../utils"
 import { AmountText } from "./amountText"
-import { IMovement } from "../../types"
+import { AddScreenProp, DetailScreenProp, HomeScreenProp, IMovement } from "../../types"
 import {  DeleteButton } from "../buttons"
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { DeleteModal } from "../crudInfoComponents"
+import { useNavigation } from "@react-navigation/native"
 
 
 export const BalanceItem:React.FC<IMovement> = ({id,description,amount,movementDate}:IMovement)=>{
 
    const[modalOpen, setModalOpen] = useState(false)
+   const navigation = useNavigation<HomeScreenProp|DetailScreenProp|AddScreenProp>()
 
    return(
+      
     <View style={BalanceItemStyles.card} key={id}>
-      <View style={BalanceItemStyles.cardIconContainer} onTouchStart={()=> alert("id del movimiento: " + id)}>
+      <View style={BalanceItemStyles.cardIconContainer} onTouchStart={()=> navigation.navigate("Detail",{id:id})}>
          {amount >= 0 
          ?<MaterialCommunityIcons name="cash-plus" size={60} color={appTheme.colorSecondary} />
          :<MaterialCommunityIcons name="cash-minus" size={60} color={appTheme.colorSecondary} />}

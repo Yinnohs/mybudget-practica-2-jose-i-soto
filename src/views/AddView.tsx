@@ -1,17 +1,13 @@
 import { useNavigation } from "@react-navigation/native"
 import { FC, useContext, useState } from "react"
-import { StyleSheet, View, TextInput, Text } from "react-native"
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, Keyboard } from "react-native"
 import { BasicButton } from "../components/buttons"
 import { Navbar } from "../components/navBar"
 import { appTheme,cardBoxShadow } from "../constants"
 import { MovementsContext } from "../constants/reducer"
-import { AddScreenProp, DetailScreenProp, HomeScreenProp, MovementContextType } from "../types"
+import { AddScreenProp, DetailScreenProp, HomeScreenProp, MovementContextType, MovementInputType } from "../types"
 import { addOne, createMovement, handleError } from "../utils"
 
-type MovementInputType = {
-    description:string
-    amount:string
-}
 
 
 export const AddView:FC = ()=>{
@@ -62,7 +58,7 @@ export const AddView:FC = ()=>{
             </View>
 
 
-            <View style={[styles.containersize, styles.inputContainer]}>
+            <TouchableOpacity activeOpacity={1} style={[styles.inputContainer]} onPress={Keyboard.dismiss}>
                 <View style={styles.division}>
                     <Text style={styles.label}>Descripción</Text>
                     <TextInput style={styles.input}
@@ -81,9 +77,9 @@ export const AddView:FC = ()=>{
                         keyboardType="numbers-and-punctuation"
                     />
                 </View>
-            </View>
-            <View style={[styles.buttonContainer, styles.containersize]}>
-                <BasicButton label="Cancelar" action={()=> alert("Cancelar")} />
+            </TouchableOpacity>
+            <View style={[styles.buttonContainer]}>
+                <BasicButton label="Cancelar" action={()=> navigation.navigate("Home")} />
                 {movementInput.amount === "" || movementInput.description === ""
                 ? <BasicButton label="Enviar" action={()=> console.log("disabled")} disabled={true} />
                 :<BasicButton label="Enviar" action={()=> handleCreation()} />
@@ -106,20 +102,20 @@ const styles = StyleSheet.create({
         paddingTop:100
     },
     buttonContainer:{
+        flex:0.5,
+        width:'100%',
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-evenly',
-        alignItems:'center',
+        alignItems:'flex-start',
     },
     inputContainer:{
+        width:'100%',
+        height:'70%',
         display:'flex',
         flexDirection:'column',
-        justifyContent:'flex-start',
+        justifyContent:'center',
         alignItems:'center',
-    },
-    containersize:{
-        width:'100%',
-        height:'40%'
     },
     header:{
         position:'absolute',
@@ -136,7 +132,7 @@ const styles = StyleSheet.create({
         borderWidth:1.5,
         borderColor:appTheme.colorPrimary,
         padding:20,
-        fontSize:18,
+        fontSize:15,
         ...cardBoxShadow,
         borderRadius:5
     },
@@ -149,12 +145,12 @@ const styles = StyleSheet.create({
         width:150,
         color:appTheme.colorSecondary,
         backgroundColor:appTheme.colorPrimary,
-        fontSize:25,
+        fontSize:15,
         paddingVertical:10,
         textAlign:'center'
     },
     headerText:{
-        fontSize:26,
+        fontSize:15,
         color:appTheme.colorBackground
     }
 })

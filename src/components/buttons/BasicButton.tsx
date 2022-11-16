@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
         paddingHorizontal:20,
         ...buttonBoxShadow,
         backgroundColor:appTheme.colorPrimary,
-        width:140,
-        height:75,
+        width:120,
+        height:40,
         borderRadius:40,
     },
     text:{
-        fontSize:18,
+        fontSize:15,
         color:appTheme.colorSecondary
     }
 })

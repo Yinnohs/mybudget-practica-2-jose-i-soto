@@ -8,7 +8,7 @@ export const AmountText:React.FC<{amount:number}> = ({amount}:{amount:number})=>
         <View style={BalanceItemStyles.cardInfoContainer}>
             {amount >= 0 
                 ? <Text style={BalanceItemStyles.cardInfoBalance}>+{amount}</Text>
-                : <Text style={BalanceItemStyles.cardInfoBalance}>{amount}</Text>
+                : <Text style={{...BalanceItemStyles.cardInfoBalance, color:appTheme.colorWarning}}>{amount}</Text>
             }
         </View>
         
@@ -21,7 +21,7 @@ const BalanceItemStyles = StyleSheet.create({
     cardInfoBalance:{
         fontSize:appTheme.secondaryFontsize,
         fontWeight:"800",
-        color:appTheme.colorSecondary,
+        color:appTheme.colorPass,
     },
     cardInfoContainer:{
         backgroundColor: appTheme.colorPrimary,
