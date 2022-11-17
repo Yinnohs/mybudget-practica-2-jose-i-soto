@@ -2,6 +2,7 @@ import {RouteProp, useNavigation } from "@react-navigation/native"
 import React, {useContext, useEffect, useState } from "react"
 import { TextInput, Text, StyleSheet,View, TouchableOpacity, Keyboard} from "react-native"
 import { BasicButton } from "../components/buttons"
+import { CustomDatePicker } from "../components/customInput"
 import { Navbar } from "../components/navBar"
 import { appTheme, cardBoxShadow, MovementsContext } from "../constants"
 import { 
@@ -24,13 +25,15 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
     currentMovement
     const[movementInput, setMovementInput] = useState<MovementInputType>({
         amount:"",
-        description:""
+        description:"",
+        movementDate: new Date()
     })
 
     useEffect(()=>{
         setMovementInput({
                 amount:currentMovement!.amount.toString(),
-                description: currentMovement!.description
+                description: currentMovement!.description,
+                movementDate: currentMovement!.movementDate
             })
     },[])
 
@@ -45,6 +48,14 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
         setMovementInput({
             ...movementInput,
             amount: input
+        })
+    }
+
+
+    const handleDate = (input:Date)=>{
+        setMovementInput({
+            ...movementInput,
+            movementDate: input
         })
     }
 
@@ -103,6 +114,14 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
                     value={movementInput.amount.toString()}
                     onChangeText={(text:string)=> handleAmount(text)}
                     keyboardType="numbers-and-punctuation"
+                />
+            </View>
+
+            <View style={styles.division}>
+                <Text style={styles.label}>Cantidad</Text>
+                <CustomDatePicker
+                dateState={movementInput.movementDate}
+                setter={handleDate}
                 />
             </View>
         </TouchableOpacity>

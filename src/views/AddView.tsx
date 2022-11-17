@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native"
 import { FC, useContext, useState } from "react"
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, Keyboard } from "react-native"
 import { BasicButton } from "../components/buttons"
+import { CustomDatePicker } from "../components/customInput"
 import { Navbar } from "../components/navBar"
 import { appTheme,cardBoxShadow } from "../constants"
 import { MovementsContext } from "../constants/reducer"
@@ -15,7 +16,8 @@ export const AddView:FC = ()=>{
     const {movements, setMovements} = useContext(MovementsContext) as MovementContextType
     const[movementInput, setMovementInput] = useState<MovementInputType>({
         amount:"",
-        description:""
+        description:"",
+        movementDate:new Date()
     })
 
     const handleCreation = (): void => {
@@ -29,7 +31,8 @@ export const AddView:FC = ()=>{
         }
         console.log(amount)
         const description = movementInput.description.trim()
-        const newMovement = createMovement(amount,description)
+        const date = movementInput.movementDate
+        const newMovement = createMovement(amount,description, date)
 
         addOne(movements,setMovements,newMovement)
 
@@ -48,6 +51,14 @@ export const AddView:FC = ()=>{
         setMovementInput({
             ...movementInput,
             amount: input
+        })
+    }
+
+    const handleDate = (input:Date)=>{
+        console.log({input}) 
+        setMovementInput({
+            ...movementInput,
+            movementDate:input
         })
     }
     return(
@@ -75,6 +86,13 @@ export const AddView:FC = ()=>{
                         value={movementInput.amount.toString()}
                         onChangeText={(text:string)=> handleAmount(text)}
                         keyboardType="numbers-and-punctuation"
+                    />
+                </View>
+                <View style={styles.division}>
+                    <Text style={styles.label}>Fecha</Text>
+                    <CustomDatePicker
+                    dateState={movementInput.movementDate}
+                    setter={handleDate}
                     />
                 </View>
             </TouchableOpacity>
@@ -138,6 +156,7 @@ const styles = StyleSheet.create({
     },
     division:{
         width:'100%',
+        height:"20%",
         marginVertical:30,
         marginLeft:30
     },
