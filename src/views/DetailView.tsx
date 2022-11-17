@@ -70,7 +70,10 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
             if(movement.id === id){
                 if(movement.amount !== amount) movement.amount = amount
                 if(movement.description !== movementInput.description){ 
-                    movementInput.description = movementInput.description
+                    movement.description = movementInput.description
+                }
+                if(movementInput.movementDate.toUTCString() !== movement.movementDate.toUTCString()){
+                    movement.movementDate = movementInput.movementDate
                 }
                 return movement
             }
@@ -114,16 +117,15 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
                     value={movementInput.amount.toString()}
                     onChangeText={(text:string)=> handleAmount(text)}
                     keyboardType="numbers-and-punctuation"
-                />
-            </View>
 
-            <View style={styles.division}>
-                <Text style={styles.label}>Cantidad</Text>
+                />
+                 <Text style={styles.label}>Cantidad</Text>
                 <CustomDatePicker
                 dateState={movementInput.movementDate}
                 setter={handleDate}
                 />
             </View>
+
         </TouchableOpacity>
         <View style={[styles.buttonContainer, styles.containersize]}>
             <BasicButton label="Cancelar" action={()=> navigation.navigate("Home")} />
@@ -162,11 +164,11 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'flex-start',
         alignItems:'center',
-        height:'35%'
+        height:'45%'
     },
     containersize:{
         width:'100%',
-        height:'30%'
+        height:'10%'
     },
     header:{
         position:'absolute',
