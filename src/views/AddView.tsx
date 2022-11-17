@@ -27,7 +27,6 @@ export const AddView:FC = ()=>{
             handleError('El campo de "Cantidad" debe ser correcto, y tener + o -')
             return
         }
-        console.log(amount)
         const description = movementInput.description.trim()
         const newMovement = createMovement(amount,description)
 
