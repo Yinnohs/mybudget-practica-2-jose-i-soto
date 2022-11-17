@@ -1,3 +1,3 @@
 export function stringDateFormatter(date:Date):string{
-    return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
 }

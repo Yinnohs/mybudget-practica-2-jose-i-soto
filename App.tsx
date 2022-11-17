@@ -5,6 +5,7 @@ import { MovementProvider } from './src/constants';
 import { AddView, HomeView } from './src/views';
 import { DetailView } from './src/views/DetailView';
 import { LoadingFonts } from './src/views/LoadingFonts';
+import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator()
 

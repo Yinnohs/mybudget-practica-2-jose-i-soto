@@ -2,6 +2,7 @@ import {RouteProp, useNavigation } from "@react-navigation/native"
 import React, {useContext, useEffect, useState } from "react"
 import { TextInput, Text, StyleSheet,View, TouchableOpacity, Keyboard} from "react-native"
 import { BasicButton } from "../components/buttons"
+import { CustomDatePicker } from "../components/customInput"
 import { Navbar } from "../components/navBar"
 import { appTheme, cardBoxShadow, MovementsContext } from "../constants"
 import { 
@@ -24,13 +25,15 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
     currentMovement
     const[movementInput, setMovementInput] = useState<MovementInputType>({
         amount:"",
-        description:""
+        description:"",
+        movementDate: new Date()
     })
 
     useEffect(()=>{
         setMovementInput({
                 amount:currentMovement!.amount.toString(),
-                description: currentMovement!.description
+                description: currentMovement!.description,
+                movementDate: currentMovement!.movementDate
             })
     },[])
 
@@ -48,6 +51,14 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
         })
     }
 
+
+    const handleDate = (input:Date)=>{
+        setMovementInput({
+            ...movementInput,
+            movementDate: input
+        })
+    }
+
     const handleUpdate = ()=>{
         const amount = parseFloat(movementInput.amount)
         if(isNaN(amount)){
@@ -59,7 +70,10 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
             if(movement.id === id){
                 if(movement.amount !== amount) movement.amount = amount
                 if(movement.description !== movementInput.description){ 
-                    movementInput.description = movementInput.description
+                    movement.description = movementInput.description
+                }
+                if(movementInput.movementDate.toUTCString() !== movement.movementDate.toUTCString()){
+                    movement.movementDate = movementInput.movementDate
                 }
                 return movement
             }
@@ -103,8 +117,15 @@ export const DetailView = ({route}:{route:RouteProp<RouteType>})=>{
                     value={movementInput.amount.toString()}
                     onChangeText={(text:string)=> handleAmount(text)}
                     keyboardType="numbers-and-punctuation"
+
+                />
+                 <Text style={styles.label}>Cantidad</Text>
+                <CustomDatePicker
+                dateState={movementInput.movementDate}
+                setter={handleDate}
                 />
             </View>
+
         </TouchableOpacity>
         <View style={[styles.buttonContainer, styles.containersize]}>
             <BasicButton label="Cancelar" action={()=> navigation.navigate("Home")} />
@@ -143,11 +164,11 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'flex-start',
         alignItems:'center',
-        height:'35%'
+        height:'45%'
     },
     containersize:{
         width:'100%',
-        height:'30%'
+        height:'10%'
     },
     header:{
         position:'absolute',

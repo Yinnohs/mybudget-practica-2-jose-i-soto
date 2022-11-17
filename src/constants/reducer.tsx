@@ -8,7 +8,7 @@ const mockData :IMovement[] = []
 
 
 export const MovementProvider: React.FC<any> = ({ children }:{children:any}):any => {
-  const [movements,setMovements] = React.useState<IMovement[]>([...mockData])
+  const [movements,setMovements] = React.useState<IMovement[]>([])
 
     return (
         <MovementsContextProvider value={{movements, setMovements}}>

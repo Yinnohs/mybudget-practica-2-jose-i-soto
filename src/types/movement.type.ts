@@ -12,5 +12,6 @@ export type MovementContextType = {
 
 export type MovementInputType = {
     description:string
-    amount:string
+    amount:string,
+    movementDate:Date
 }

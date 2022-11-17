@@ -33,6 +33,7 @@ export const HomeView: React.FC = ()=>{
         setBalances({
             totalBalance,negativeBalance,positiveBalance
         })
+        console.log(movements)
     },[movements])
 
     return(
